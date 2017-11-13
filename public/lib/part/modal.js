@@ -20,6 +20,12 @@ var _App;
             height: s[i][1] + 'px'
         };
     }
+    size.full = {
+        left: '50px',
+        top: '50px',
+        width: 'calc(100% - 100px)',
+        height: 'calc(100% - 100px)'
+    }
 
     r.create('part.modal', {
         getInitialState: function() {
