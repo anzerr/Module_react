@@ -30,13 +30,15 @@ var _App;
                     r('div').style({float: 'left', width: size + 'px', height: '100%'}).c(
                         this.props.children
                     ),
-                    r('div').style({float: 'left', width: '20px', height: '20px', background: 'red'}).on('click', function(e) {
+                    r('div').style({float: 'left', width: '20px'}).on('click', function(e) {
                         if (self.props.onClick) {
                             self.props.onClick(e);
                         } else {
                             self.setState({open: !self.state.open});
                         }
-                    }).c('')
+                    }).c(
+                        (this.props.button)? this.props.button : r('div').style({width: '100%', height: '20px', background: 'red'}).c()
+                    )
                 )
             ));
         }
