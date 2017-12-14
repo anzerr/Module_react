@@ -23,7 +23,7 @@ var _App;
                 })(this.props.button[i]);
             }
 
-            return r('part.modal').set({show: this.props.show, size: this.props.size}).c(
+            return r('part.modal').set({show: this.props.show, size: this.props.size, style: this.props.style}).c(
                 r('div').style({height: 'calc(100% - 38px)'}).c(
                     this.props.children
                 ),

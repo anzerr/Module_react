@@ -39,7 +39,7 @@ var _App;
                     position: 'absolute',
                     background: 'white',
                     zIndex: 100
-                }, size[this.props.size] || size.small).c(
+                }, size[this.props.size] || size.small, this.props.style).c(
                     r('div').style('full', {position: 'relative'}).c(
                         this.props.children
                     )

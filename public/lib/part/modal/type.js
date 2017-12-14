@@ -24,7 +24,8 @@ var _App;
                 show: this.props.show,
                 size: this.props.size,
                 onClick: this.props.onClick,
-                button: button[this.props.type] || []
+                button: button[this.props.type] || [],
+                style: this.props.style
             }).c(
                 this.props.children
             );
