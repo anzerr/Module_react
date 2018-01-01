@@ -29,7 +29,7 @@ var _App;
                 return r('part.list').set({value: this.props.value}).on('change', this.change).c();
             }
             if (this.props.type == 'json') {
-                return r('part.list').set({value: this.props.value}).on('change', this.change).c();
+                return r('part.json').set({value: this.props.value}).on('change', this.change).c();
             }
             var o = {type: this.props.type || 'input', value: this.props.value}, key = ['placeholder', 'style', 'min', 'max'];
             for (var i in key) {
