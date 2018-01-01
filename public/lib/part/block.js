@@ -19,7 +19,7 @@ var _App;
                 position: 'absolute',
                 bottom: '0px',
                 right: '0px'
-            });
+            }, this.props.style);
 
             for (var i in this.props) {
                 if (i.match(/^on/)) {

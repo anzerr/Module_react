@@ -28,6 +28,9 @@ var _App;
             if (this.props.type == 'list') {
                 return r('part.list').set({value: this.props.value}).on('change', this.change).c();
             }
+            if (this.props.type == 'json') {
+                return r('part.list').set({value: this.props.value}).on('change', this.change).c();
+            }
             var o = {type: this.props.type || 'input', value: this.props.value}, key = ['placeholder', 'style', 'min', 'max'];
             for (var i in key) {
                 o[key[i]] = this.props[key[i]];

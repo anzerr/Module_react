@@ -4,9 +4,9 @@ var _App;
 
     var deus = new $._deus('shared'), r = deus.pub();
 
-    r.create('shared.scroll', {
+    r.create('part.scroll', {
         getInitialState: function() {
-            return ({start: 0, bar: 0});
+            return ({start: 0, bar: 0, anim: true});
         },
 
         _size: function(e) {
@@ -20,22 +20,23 @@ var _App;
         _update: function() {
           var inner = this._size(this.refs.inner), outer = this._size(this.refs.outer);
           if (inner && outer) {
-              this.setState({size: Math.min(1, outer[1] / inner[1]), iSize: inner[1], oSize: outer[1]});
+              this.setState({size: Math.min(1, outer[1] / inner[1]), iSize: inner[1], oSize: outer[1], resize: false});
           }
         },
 
         componentDidMount: function() {
             var self = this, f1 = function(e) {
                 if (self.state.drag) {
-                    self.setState({bar: Math.min(self.state.size, (self.state.pos - e.pageY) / self.state.oSize)});
+                    self.setState({bar: (self.state.pos - e.pageY) / self.state.oSize});
                 }
             }, f2 = function(e) {
                 if (self.state.drag) {
                     window.document.body.className = window.document.body.className.replace(/\snoselect/g, '').trim();
                     if (self.state.resize) {
+                        console.log('resize');
                         self._update();
                     }
-                    self.setState({drag: false, resize: false});
+                    self.setState({anim: true, drag: false, resize: false});
                 }
             };
             window.addEventListener('mousemove', f1);
@@ -87,14 +88,17 @@ var _App;
             };
 
             return (r('div').ref('outer').style({width: '100%', height: '100%', overflow: 'hidden', position: 'relative'}).c(
-                r('div').ref('inner').style({
+                r('div').ref('inner').on('wheel', function(e) {
+                    var s = self.state.bar - (e.deltaY / 2000);
+                    self.setState({bar: Math.max((self.state.oSize / self.state.iSize) - 1, Math.min(-self.state.start, s))});
+                }).style((this.state.anim) ? 'anim' : '', {
                     width: 'calc(100% - ' + show + 'px)',
                     marginTop: ((show)? ((this.state.oSize - this.state.iSize) * scale) : 0) + 'px'
                 }).c(this.props.children),
-                r('div').style(s).c(
+                r('div').style(s, (this.state.anim) ? 'anim' : '').c(
                     r('div').style('anim', {width: show + 'px', height: '100%', float: 'right'}).set({'onMouseDown': function(e) {
                         window.document.body.className += ' noselect';
-                        self.setState({drag: true, start: v, pos: e.pageY});
+                        self.setState({drag: true, start: v, pos: e.pageY, anim: false});
                         self.state.hookMove(e);
                     }}).c(
                         (this.props.slide)? this.props.slide : r('div').style('full', {background: 'white'}).c()

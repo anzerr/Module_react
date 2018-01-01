@@ -16,7 +16,7 @@ var _App;
         '"KO"': 'rgb(255, 0, 0)'
     };
 
-    r.create('code', {
+    r.create('part.code', {
         getInitialState: function() {
             return ({});
         },
@@ -28,7 +28,7 @@ var _App;
                 var c = (str[i].match(/\t/g) || []).length;
                 str[i] = str[i].replace(/\t*/g, '');
 
-                out.push(r('div',).set({key: out.length}).style({marginLeft: c * 20}).c(
+                out.push(r('div').set({key: out.length}).style({marginLeft: c * 20}).c(
                     (function() {
                         var s = /".*?":\s/.exec(str[i]);
 
