@@ -45,14 +45,12 @@ var _App;
                     }
                     if ($.is.function(self.props.onChange) && data) {
                         var d = JSON.stringify(data, null, '\t');
-                        console.log(((d.match(/\n/g) || []).length + 1));
                         self.setState({height: ((d.match(/\n/g) || []).length + 1) * line});
                         self.props.onChange(d);
                     }
 				}).on('change', function(e) {
                     if ($.is.function(self.props.onChange)) {
                         var d = e.target.value;
-                        console.log(((d.match(/\n/g) || []).length + 1));
                         self.setState({height: ((d.match(/\n/g) || []).length + 1) * line});
                         self.props.onChange(d);
                     }
