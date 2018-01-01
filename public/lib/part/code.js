@@ -24,11 +24,12 @@ var _App;
         render: function() {
             var str = JSON.stringify(this.props.data, null, '\t').split('\n'), out = [];
 
+            var space = this.props.space || 20;
             for (var i in str) {
                 var c = (str[i].match(/\t/g) || []).length;
                 str[i] = str[i].replace(/\t*/g, '');
 
-                out.push(r('div').set({key: out.length}).style({marginLeft: c * 20}).c(
+                out.push(r('div').set({key: out.length}).style({marginLeft: c * space}).c(
                     (function() {
                         var s = /".*?":\s/.exec(str[i]);
 

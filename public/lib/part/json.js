@@ -20,7 +20,6 @@ var _App;
             } catch(e) {
                 error = e.toString();
             }
-            console.log(error);
 
             var data = $.json.parse(this.props.value), line = 19.2;
             var show = (!this.state.active && data), cur = (this.props.value.match(/\n/g) || []).length + 1;
@@ -58,7 +57,7 @@ var _App;
                         self.props.onChange(d);
                     }
                 }).c(),
-                r('div').style('abs', 'anim', {border: '1px solid black', width: '100%', pointerEvents: 'none', opacity: show ? 1 : 0, top: '0px', left: '0px'}).c(
+                r('div').style('abs', 'anim', {minHeight: height + 'px', border: '1px solid black', width: '100%', pointerEvents: 'none', opacity: show ? 1 : 0, top: '0px', left: '0px'}).c(
                     r('part.code').set({data: data, space: 32}).c()
                 )
 			);
