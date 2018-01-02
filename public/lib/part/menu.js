@@ -10,7 +10,7 @@ var _App;
         },
 
         render: function() {
-            var self = this, size = 200, show = (self.props.onClick)? this.props.open : this.state.open;
+            var self = this, size = this.props.size || 200, show = (self.props.onClick)? this.props.open : this.state.open;
             return (r('div').style('full', 'abs').c(
                 r('part.block').set({show: show}).on('click', function(e) {
                     if (self.props.onClick) {
@@ -26,7 +26,7 @@ var _App;
                     zIndex: 100,
                     height: '100%',
                     background: 'rgb(27, 28, 29)'
-                }).c(
+                }, this.props.style).c(
                     r('div').style({float: 'left', width: size + 'px', height: '100%'}).c(
                         this.props.children
                     ),
