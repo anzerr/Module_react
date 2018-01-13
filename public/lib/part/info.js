@@ -119,7 +119,12 @@ var _App;
                             //width: 'calc(100% - ' + ((d || y)? 0 : 22 * 2) + 'px)',
                             opacity: (d || y)? 0 : 1
                         }).on('click', function() {
-                            self.state.data[i].time = 0;
+                            for (var x in self.state.data) {
+                                if (self.state.data[x].key == s.key) {
+                                    self.state.data[x].time = 0;
+                                    break;
+                                }
+                            }
                             this.setState({data: self.state.data});
                         }).c(
                             r('div').style({display: 'table'}).c(
