@@ -84,7 +84,8 @@ var _App;
                 top: Math.min(100 - (this.state.size * 100), Math.max(0, v * -100)) + '%',
                 right: '0px',
                 height: ((this.state.size || 1 ) * 100) + '%',
-                width: size + 'px'
+                width: size + 'px',
+                pointerEvents: 'none'
             };
 
             return (r('div').ref('outer').style({width: '100%', height: '100%', overflow: 'hidden', position: 'relative'}).c(
@@ -96,7 +97,7 @@ var _App;
                     marginTop: ((show)? ((this.state.oSize - this.state.iSize) * scale) : 0) + 'px'
                 }).c(this.props.children),
                 r('div').style(s, (this.state.anim) ? 'anim' : '').c(
-                    r('div').style('anim', {width: show + 'px', height: '100%', float: 'right'}).set({'onMouseDown': function(e) {
+                    r('div').style('anim', {width: show + 'px', pointerEvents: 'all', height: '100%', float: 'right'}).set({'onMouseDown': function(e) {
                         window.document.body.className += ' noselect';
                         self.setState({drag: true, start: v, pos: e.pageY, anim: false});
                         self.state.hookMove(e);

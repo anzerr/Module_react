@@ -105,19 +105,22 @@ var _App;
         },
 
         render: function() {
-            var o = [];
+            var o = [], self = this;
 
             for (var i in this.state.data) {
                 (function(s, i) {
                     var d = (s.time <= 0), y = (s.time >= (s.max - 1));
                     o.push(r('div').set({key: s.key}).c(
-                        r('div').style('anim', type[s.type] || {}, msgStyle, {
+                        r('div').style('anim', 'click', type[s.type] || {}, msgStyle, {
                             pointerEvents: 'all',
                             maxHeight: (d || y)? '0px' : '200px',
                             margin: (d || y)? '0px' : '10px 22px',
                             width: 'calc(100% - ' + (22 * 2) + 'px)',
                             //width: 'calc(100% - ' + ((d || y)? 0 : 22 * 2) + 'px)',
                             opacity: (d || y)? 0 : 1
+                        }).on('click', function() {
+                            self.state.data[i].time = 0;
+                            this.setState({data: self.state.data});
                         }).c(
                             r('div').style({display: 'table'}).c(
                                 r('div').style(iconStyle).c(
