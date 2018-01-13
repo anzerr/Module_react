@@ -99,7 +99,14 @@ var _App;
                                 r('i').class('copy icon').style('click').on('click', function() {
                                     if (self.refs.data) {
                                         self.refs.data.select();
-                                        document.execCommand('copy');
+                                        var a = document.execCommand('copy');
+                                        if ($.is.function($.info)) {
+                                            if (a) {
+                                                $.info('success', 'You have copied the form data.');
+                                            } else {
+                                                $.info('error', 'Something happend when copying the from.');
+                                            }
+                                        }
                                     }
                                 }).c()
         					),
