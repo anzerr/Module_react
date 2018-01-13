@@ -125,7 +125,7 @@ var _App;
                                     break;
                                 }
                             }
-                            this.setState({data: self.state.data});
+                            self.setState({data: self.state.data});
                         }).c(
                             r('div').style({display: 'table'}).c(
                                 r('div').style(iconStyle).c(
