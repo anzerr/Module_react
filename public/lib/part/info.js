@@ -34,7 +34,6 @@ var _App;
     $.info = function(type, msg, time, s) {
         var shared = s || 'any';
         if (_handle[shared]) {
-            console.log('info added');
             _handle[shared].set({
                 key: randomKey(16),
                 type: type || 'info',
@@ -93,14 +92,18 @@ var _App;
                 }
             }
 
-            this.setState({now: now, think: setTimeout(function () {
+            var id = {};
+            for (var i in data) {
+                id[data[i].key] = i;
+            }
+
+            this.setState({now: now, id: id, think: setTimeout(function () {
                 self.think();
             }, 200), data: data});
         },
 
         update: function(data) {
             this.state.data.push(data);
-            console.log(data);
             this.setState({data: this.state.data});
         },
 
@@ -108,11 +111,11 @@ var _App;
             var o = [], self = this;
 
             for (var i in this.state.data) {
-                (function(s, i) {
+                (function(s, key) {
                     var d = (s.time <= 0), y = (s.time >= (s.max - 1));
                     o.push(r('div').set({key: s.key}).c(
                         r('div').style('anim', 'click', type[s.type] || {}, msgStyle, {
-                            pointerEvents: 'all',
+                            pointerEvents: (d || y)? 'none' : 'all',
                             maxHeight: (d || y)? '0px' : '200px',
                             margin: (d || y)? '0px' : '10px 22px',
                             width: 'calc(100% - ' + (22 * 2) + 'px)',
@@ -136,10 +139,10 @@ var _App;
                             r('div').style('anim', {background: 'black', height: '3px', marginLeft: (100 - ((s.time / s.max) * 100)) + '%', width: ((s.time / s.max) * 100) + '%' }).c()
                         )
                     ));
-                })(this.state.data[i], i);
+                })(this.state.data[i], this.state.data[i].key);
             }
 
-            return (r('div').style('abs', 'full', {width: '25%', pointerEvents: 'none', zIndex: 997, top: '10px', right: '10px'}).c(o));
+            return (r('div').style('abs', 'full', {width: '25%', minWidth: '400px', pointerEvents: 'none', zIndex: 997, top: '10px', right: '10px'}).c(o));
         }
     });
 })(_App || (_App = {}));
